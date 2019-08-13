@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{A6D0B1E3-9B0E-42B1-A57E-3CB71E80BA56}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="client\dpr\PizzariaFrontend.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="server\dpr\PizzariaBackend.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="PizzariaFrontend">
+        <MSBuild Projects="client\dpr\PizzariaFrontend.dproj"/>
+    </Target>
+    <Target Name="PizzariaFrontend:Clean">
+        <MSBuild Projects="client\dpr\PizzariaFrontend.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PizzariaFrontend:Make">
+        <MSBuild Projects="client\dpr\PizzariaFrontend.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PizzariaBackend">
+        <MSBuild Projects="server\dpr\PizzariaBackend.dproj"/>
+    </Target>
+    <Target Name="PizzariaBackend:Clean">
+        <MSBuild Projects="server\dpr\PizzariaBackend.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PizzariaBackend:Make">
+        <MSBuild Projects="server\dpr\PizzariaBackend.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="PizzariaFrontend;PizzariaBackend"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="PizzariaFrontend:Clean;PizzariaBackend:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="PizzariaFrontend:Make;PizzariaBackend:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
